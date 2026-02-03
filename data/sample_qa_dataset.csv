@@ -1,0 +1,5 @@
+question,response,reference
+"What is artificial intelligence?","AI is the simulation of human intelligence by machines.","AI simulates human intelligence in machines."
+"What is machine learning?","ML is a subset of AI that learns from data.","Machine learning enables systems to learn from data."
+"What is deep learning?","Deep learning uses neural networks with multiple layers.","Deep learning uses multi-layer neural networks."
+

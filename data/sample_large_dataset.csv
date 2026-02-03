@@ -1,0 +1,12 @@
+question,response
+"What is variable?","A variable stores data values."
+"What is function?","A function is a reusable block of code."
+"What is loop?","A loop repeats code multiple times."
+"What is condition?","A condition checks if something is true."
+"What is array?","An array stores multiple values."
+"What is object?","An object is a data structure."
+"What is class?","A class is a blueprint for objects."
+"What is method?","A method is a function in a class."
+"What is inheritance?","Inheritance allows classes to inherit properties."
+"What is polymorphism?","Polymorphism allows different forms of the same interface."
+

@@ -49,3 +49,4 @@ example/
 data/api_keys.json
 data/webhooks.json
 data/*.db
+tests/README.md

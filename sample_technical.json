@@ -1,0 +1,13 @@
+[
+  {
+    "question": "Explain how HTTP works",
+    "response": "HTTP (HyperText Transfer Protocol) is a protocol for transferring data over the web. It uses request-response cycles where clients send requests and servers respond.",
+    "reference": "HTTP is a protocol for web data transfer using request-response cycles."
+  },
+  {
+    "question": "What is REST API?",
+    "response": "REST (Representational State Transfer) is an architectural style for designing web services. It uses standard HTTP methods like GET, POST, PUT, DELETE.",
+    "reference": "REST is an architectural style for web services using HTTP methods."
+  }
+]
+

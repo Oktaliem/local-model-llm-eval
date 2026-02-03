@@ -1,0 +1,54 @@
+services:
+  llm-judge-app:
+    build: .
+    container_name: llm-judge-app
+    ports:
+      - "8501:8501"
+    environment:
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      - DB_PATH=/app/data/llm_judge.db
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    volumes:
+      # Persist database data
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - llm-judge-network
+    # For Linux, use host network mode to access host Ollama
+    # For macOS/Windows, host.docker.internal should work
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  llm-judge-api:
+    build: .
+    container_name: llm-judge-api
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
+      - DB_PATH=/app/data/llm_judge.db
+      - API_KEYS_FILE=/app/data/api_keys.json
+      - WEBHOOKS_FILE=/app/data/webhooks.json
+      - RATE_LIMIT_REQUESTS=${RATE_LIMIT_REQUESTS:-100}
+      - RATE_LIMIT_WINDOW=${RATE_LIMIT_WINDOW:-3600}
+    volumes:
+      # Persist database data and API keys
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - llm-judge-network
+    command: uvicorn backend.api_server:app --host 0.0.0.0 --port 8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+networks:
+  llm-judge-network:
+    driver: bridge
+
