@@ -1,0 +1,48 @@
+# OS / editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Python byte‑code and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports (htmlcov, reports, mutant outputs)
+htmlcov/
+reports/
+mutants/
+coverage/
+*.coverage
+
+# Docker/CI generated files
+docker-*.log
+*.tmp
+*.log
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+
+# Development files
+COMMIT_MSG.txt
+Jenkinsfile
+documentation/
+llm_judge.db
+llm_guardrails_test_dataset.csv
+REFACTORING_PLAN.md
+rebuild_containers.sh
+run-tests-docker.sh
+jenkins/
+Dockerfile.test
+docker-compose.test.yml
+/frontend/page_auto_compare_full.png
+example/
+/tests/e2e/E2E_TEST_PAIRED_TTEST_RESULTS.md
+/tests/e2e/E2E_TEST_PAIRED_TTEST.md
+/tests/e2e/screenshots
