@@ -4,130 +4,118 @@
 
 # Local Model LLM & AI Agent Evaluation Framework
 
-A comprehensive Streamlit application for evaluating AI agents and Large Language Models (LLMs) with multiple evaluation metrics, benchmarking capabilities, and observability features.
+A comprehensive **local-first** evaluation framework for AI agents and Large Language Models (LLMs), built with **Streamlit** (web UI), **FastAPI** (REST API), **Ollama** (local LLMs), and **SQLite** (persistence).
+
+Evaluate models and agents with **LLM-as-a-judge**, static code analysis, rich metrics, and analytics – all running on your own machine.
+
+---
 
 ## What is LLM as a Judge?
 
-LLM as a Judge uses large language models (LLMs) to evaluate the outputs of other AI systems or language models. Instead of relying solely on human reviewers or traditional metrics, this approach leverages the advanced reasoning capabilities of LLMs to assess criteria such as:
+LLM-as-a-judge uses one model to evaluate the outputs of other models or agents.  
+Instead of only using traditional metrics, it leverages an LLM to score and explain:
 
 - Accuracy and correctness
 - Relevance to the question
 - Clarity and coherence
 - Completeness
-- Helpfulness
+- Helpfulness and safety  
 
-## Features
+See **[`docs/CONCEPTS.md`](docs/CONCEPTS.md)** for conceptual details.
 
-### Feature Categories
+---
 
-This framework provides evaluation capabilities for two main use cases:
+## Key Features (Overview)
 
-#### 🤖 LLM Evaluation Features
-Evaluate text outputs from Large Language Models (responses, answers, generated content)
+- **LLM Evaluation**
+  - Manual and automatic pairwise comparison
+  - Single response grading and 5-metric comprehensive evaluation
+  - Skills evaluation (math, coding, reasoning, general)
+  - Batch evaluation from JSON/CSV
+  - Human evaluation and comparison vs. LLM judgments
 
-- **🔀 Manual Pairwise Comparison**: Compare two LLM responses to determine which one is better
-- **🤖 Auto Pairwise Comparison**: Automatically generate responses from two different models and judge them
-- **📊 Single Response Grading**: Evaluate a single LLM response with detailed feedback and scoring
-- **🎯 Comprehensive Evaluation**: Multi-metric evaluation with accuracy, relevance, coherence, hallucination detection, and toxicity checking
-- **🎓 Skills Evaluation**: Domain-specific skill assessments (mathematics, coding, reasoning, general) for LLM responses
-- **📦 Batch Evaluation**: Upload datasets (JSON/CSV) and evaluate multiple LLM test cases at once
-- **👤 Human Evaluation**: Add human annotations and compare with LLM judgments
+- **AI Agent Evaluation**
+  - Router evaluation (tool selection quality)
+  - Trajectory evaluation (multi-step reasoning and actions)
 
-#### 🤖 AI Agent Evaluation Features
-Evaluate agent behavior, decisions, and multi-step actions in AI agent systems
+- **Analytics & Configuration**
+  - Advanced analytics dashboard
+  - Saved judgments & history
+  - Evaluation templates (industry-specific)
+  - Custom metrics with custom scales
 
-- **🔀 Router Evaluation**: Evaluate routing decisions and tool selection in AI agent systems
-  - Assesses tool/function selection accuracy
-  - Analyzes routing paths and decision trees
-  - Metrics: Tool Accuracy, Routing Quality, Reasoning Quality
-- **🛤️ Trajectory Evaluation**: Evaluate multi-step action sequences, agent trajectories, and reasoning chains
-  - Analyzes step-by-step agent behavior
-  - Metrics: Step Quality, Path Efficiency, Reasoning Chain, Planning Quality
+- **Code & Testing**
+  - Static and dynamic code evaluation (multi-language)
+  - Security and code smell detection (SonarQube-style)
+  - A/B testing with statistical analysis
 
-#### 📊 Reporting & Analytics Features
-View, analyze, and manage evaluation results
+- **Integrations**
+  - REST API with API keys and rate limiting
+  - Python SDK (`api_client.py`)
+  - Webhooks for `evaluation.completed` events
 
-- **📈 Advanced Analytics**: Comprehensive analytics and visualizations for all evaluation data
-- **💾 Saved Judgments & Dashboard**: View, filter, and search all saved evaluations
+For the full list and details, see **[`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)** and **[`docs/API.md`](docs/API.md)**.
 
-#### ⚙️ Configuration & Setup Features
-Customize and configure evaluation workflows
+---
 
-- **📋 Evaluation Templates**: Reusable evaluation configurations and industry-specific templates
-- **🎯 Custom Metrics**: User-defined evaluation metrics with custom scoring functions for LLM responses
+## Quickstart
 
-#### 💻 Code Analysis Features
-Static code analysis and quality assessment with SonarQube-like capabilities
+### 1. Install prerequisites
 
-- **💻 Code-Based Evaluation**: Comprehensive static code analysis
-  - **Multi-language Support**: 
-    - Backend: Python, JavaScript (Node.js), TypeScript, Java, Go
-    - Web: JavaScript, TypeScript, HTML, CSS
-    - iOS: Swift, Objective-C
-    - Android: Kotlin, Java
-  - **Syntax Checking**: AST parsing (Python) or pattern-based validation (other languages)
-  - **Execution Testing**: Safe subprocess execution with timeout (Python, JavaScript, Swift)
-  - **Quality Metrics**: Lines of code, functions, classes, complexity, maintainability, readability
-  - **Security Vulnerability Detection** (SonarQube-like):
-    - SQL injection risks
-    - XSS (Cross-Site Scripting) risks
-    - Hardcoded credentials (passwords, API keys, secrets)
-    - Insecure function usage (eval, os.system, subprocess with shell=True)
-    - Weak cryptography (MD5, SHA1)
-    - Unsafe deserialization (pickle.loads, yaml.load)
-    - Severity levels: BLOCKER, CRITICAL, MAJOR
-  - **Code Smell Detection** (SonarQube-like):
-    - Long methods/functions (>50 lines)
-    - Large classes (>300 lines)
-    - Too many parameters (>7)
-    - Duplicate code
-    - Unused variables
-    - Magic numbers
-    - Empty catch/except blocks
-    - Severity levels: MAJOR, MINOR, INFO
-  - **Advanced Metrics**:
-    - Cyclomatic complexity
-    - Cognitive complexity
-    - Technical debt ratio
-  - **Score Calculation**: Overall score penalizes security vulnerabilities and code smells
-  - Does not use LLM as a judge (uses static analysis)
+- Python 3.8+  
+- [Ollama](https://ollama.ai) installed and running  
+- At least one local model pulled (e.g. `ollama pull llama3`)  
+- (Optional) Docker + Docker Compose
 
-#### 🧪 Testing & Experimentation Features
-Experimental and comparative testing capabilities
+### 2. Install dependencies
 
-- **🧪 A/B Testing**: Compare different models/configurations with statistical significance testing
+```bash
+pip install -r requirements.txt
+```
 
-#### 🔌 Integration Features
-Programmatic access and integration
+### 3. Run the Streamlit app
 
-- **🔌 REST API**: Programmatic access to all evaluation features with authentication and webhooks
+```bash
+streamlit run frontend/app.py
+```
 
-### Feature Summary
+Open `http://localhost:8501` in your browser.
 
-| Category | Count | Features |
-|----------|-------|----------|
-| **LLM Evaluation** | 7 | Pairwise, Auto Compare, Single, Comprehensive, Skills, Batch, Human |
-| **AI Agent Evaluation** | 2 | Router Evaluation, Trajectory Evaluation |
-| **Reporting & Analytics** | 2 | Advanced Analytics, Saved Judgments & Dashboard |
-| **Configuration & Setup** | 2 | Evaluation Templates, Custom Metrics |
-| **Code Analysis** | 1 | Code-Based Evaluation |
-| **Testing & Experimentation** | 1 | A/B Testing |
-| **Integration** | 1 | REST API |
-| **Total** | **16** | All features listed above |
+### 4. (Optional) Run with Docker
 
-**Note:** Both Router and Trajectory Evaluation use LLM as a judge, but they evaluate **agent behavior** (decisions, actions, trajectories) rather than just text outputs. Code-Based Evaluation uses static analysis and does not use LLM as a judge.
+```bash
+docker-compose build
+docker-compose up -d
+```
 
-### Advanced Features
-- **💾 Enhanced Database Storage**: Save all judgments with structured metrics and evaluation traces
-- **📊 Metrics Dashboard**: Visualize aggregate statistics and performance trends
-- **🔍 Evaluation Tracing**: Track evaluation steps, model calls, and execution paths for observability
-- **⏹️ Stop Button**: Cancel running evaluations at any time
-- **📝 Detailed Feedback**: Get comprehensive evaluations with reasoning and explanations
-- **⚙️ Model Selection**: Choose from available Ollama models (llama3, mistral, llama2, etc.)
-- **🐳 Docker Support**: Run the app in a containerized environment with persistent storage
-- **🔧 Configurable**: Customize Ollama host URL and database paths
-- **🔐 API Authentication**: API key-based authentication with rate limiting
-- **🔔 Webhook Support**: Receive notifications when evaluations complete
+See **[`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md)** for full instructions (API server, manual Docker, DB checks, etc.).
+
+---
+
+## Architecture (High-Level)
+
+- **Streamlit frontend** (`frontend/app.py`) – UI for all 16 features in 6 categories  
+- **FastAPI backend** (`backend/api_server.py`) – REST API, auth, rate limiting, webhooks  
+- **Shared core** (`core/`) – evaluation strategies, services, LLM adapters, DB repositories  
+- **SQLite database** – judgments, human annotations, router/skills/trajectory runs, A/B tests, templates, custom metrics  
+- **Docker support** – containerized deployment with persistent volumes
+
+See **[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)** and **[`docs/DATABASE.md`](docs/DATABASE.md)** for details.
+
+---
+
+## Documentation
+
+- **Getting Started**: [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md)  
+- **User Guide (Web UI)**: [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)  
+- **Concepts & Metrics**: [`docs/CONCEPTS.md`](docs/CONCEPTS.md)  
+- **API & Python SDK**: [`docs/API.md`](docs/API.md)  
+- **Architecture**: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)  
+- **Database & Metrics Schema**: [`docs/DATABASE.md`](docs/DATABASE.md)  
+- **Testing**: [`docs/TESTING.md`](docs/TESTING.md)  
+- **Troubleshooting**: [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md)  
+
+Additional test-specific docs live in `tests/README.md` and `jenkins/README.md`.
 
 ## Installation
 
