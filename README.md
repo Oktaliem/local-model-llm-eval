@@ -117,6 +117,20 @@ See **[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)** and **[`docs/DATABASE.md`
 
 ---
 
+## References & Further Reading
+
+- [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/pdf/2306.05685)  
+- [Fine-Grained Human Feedback for LLMs](https://arxiv.org/pdf/2308.03688v3)  
+- [Mastering LLM Techniques: Evaluation](https://developer.nvidia.com/blog/mastering-llm-techniques-evaluation/)  
+- [Agent Quality: Human-Like Memory for AI Agents (Kaggle Whitepaper)](https://www.kaggle.com/whitepaper-agent-quality?utm_source=www.theunwindai.com&utm_medium=referral&utm_campaign=open-source-human-like-memory-for-ai-agents)  
+- [Evaluating AI Agents in the Era of LLMs](https://medium.com/@tharika082003/evaluating-ai-agents-in-the-era-of-llms-f2550d8ae4d5)  
+- [Definitive AI Agent Evaluation Guide (Confident AI)](https://www.confident-ai.com/blog/definitive-ai-agent-evaluation-guide)  
+- [Why LLM-as-a-Judge Is the Best LLM Evaluation Method (Confident AI)](https://www.confident-ai.com/blog/why-llm-as-a-judge-is-the-best-llm-evaluation-method)  
+- [LLM-as-a-Judge Guide and Pairwise Comparison Patterns (Evidently AI)](https://www.evidentlyai.com/llm-guide/llm-as-a-judge#pairwise-comparison)  
+- …and many more community resources on LLM and AI agent evaluation.
+
+---
+
 ## License
 
 This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
